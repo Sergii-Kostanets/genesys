@@ -9,10 +9,13 @@
 </head>
 <body>
 
-<div id="customChat">
-    <div id="chatbox"></div>
-    <input type="text" id="message" placeholder="Type your message">
-    <button class="send-button" onclick="sendMessage()">Send</button>
+<div id="chatbox">
+    <div id="chatbox-messages"></div>
+    <input type="text" id="chatbox-input" placeholder="Type your message">
+    <div id="chatbox-buttons">
+        <button class="clear-button" onclick="clearMessage()">&times;</button>
+        <button class="send-button" onclick="sendMessage()">&#10162;</button>
+    </div>
 </div>
 
 <script type="text/javascript" src="env.js" charset="utf-8"></script>

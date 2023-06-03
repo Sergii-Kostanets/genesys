@@ -20,12 +20,18 @@ Genesys("subscribe", "MessagingService.messagesReceived", function({ data }) {
     }
 });
 
+var messageInput = document.getElementById("chatbox-input");
+
+// Function to clear the input field
+function clearMessage() {
+    messageInput.value = ""; // Clear the input field
+}
+
 // Function to send a message
 function sendMessage() {
-    var messageInput = document.getElementById("message");
     var message = messageInput.value;
-    messageInput.value = ""; // Clear the input field
-
+    clearMessage()
+    
     Genesys("command", "MessagingService.sendMessage", {
         message: message
     });
@@ -33,7 +39,7 @@ function sendMessage() {
 
 // Function to display a message in the chatbox
 function displayMessage(sender, message) {
-    var chatbox = document.getElementById("chatbox");
+    var chatboxMessages = document.getElementById("chatbox-messages");
     var messageElement = document.createElement("div");
     messageElement.classList.add("message");
 
@@ -48,14 +54,13 @@ function displayMessage(sender, message) {
     messageElement.appendChild(senderElement);
     messageElement.appendChild(contentElement);
 
-    chatbox.appendChild(messageElement);
+    chatboxMessages.appendChild(messageElement);
 
     // Scroll to the bottom of the chatbox
-    chatbox.scrollTop = chatbox.scrollHeight;
+    chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
 }
 
 // Add event listener for Enter key press
-var messageInput = document.getElementById("message");
 messageInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         sendMessage();
